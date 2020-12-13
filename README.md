@@ -81,3 +81,4 @@ Buy me a coffee: https://www.buymeacoffee.com/stargazerllc
 
 ** TODO: **
 * Add pure google support instead of scale serp
+* add Cypress.io
