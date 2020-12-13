@@ -1,6 +1,6 @@
 {
   "name": "gatsby-source-google-reviews-en",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A gatsby plugin to source english google places reviews",
   "main": "index.js",
   "scripts": {
