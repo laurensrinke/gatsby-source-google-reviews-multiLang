@@ -27,16 +27,15 @@ exports.sourceNodes = async (
     api_key: apiKey,
     search_type: "place_reviews",
     place_id: placeId,
-    hl:'en',
-    gl:'us'
+    hl: "en",
+    gl: "us",
   };
-  console.log(`*--params`, params);
+
   const response = await axios
     .get("https://api.scaleserp.com/search", {
       params,
     })
     .catch((error) => {
-      console.log(`*--error`, error);
       throw new Error(`Error fetching results from ScaleSerp API: ${error}`);
     });
 

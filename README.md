@@ -77,3 +77,7 @@ You can find your place id [here](https://developers.google.com/maps/documentati
 
 Your Support is appreceated and goes a long way to keeping open source software available and maintained:
 Buy me a coffee: https://www.buymeacoffee.com/stargazerllc
+
+
+** TODO: **
+* Add pure google support instead of scale serp
