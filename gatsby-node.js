@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 exports.onPreInit = () =>
-  console.log("Loading gatsby-source-google-reviews-MultiLang");
+  console.log("Loading gatsby-source-google-reviews-multiLang");
 
 const NODE_TYPE = "GoogleReview";
 

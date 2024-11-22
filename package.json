@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-source-google-reviews-MultiLang",
+  "name": "gatsby-source-google-reviews-multiLang",
   "version": "1.0.2",
   "description": "A gatsby plugin to source english google places reviews",
   "main": "index.js",
