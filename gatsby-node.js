@@ -1,13 +1,13 @@
 const axios = require("axios");
 
 exports.onPreInit = () =>
-  console.log("Loading gatsby-source-google-reviews-en");
+  console.log("Loading gatsby-source-google-reviews-MultiLang");
 
 const NODE_TYPE = "GoogleReview";
 
 exports.sourceNodes = async (
   { actions, createNodeId, createContentDigest },
-  { placeId, apiKey, langs = [], isEnabled, ...rest }
+  { placeId, apiKey, language, langs = [], isEnabled, ...rest }
 ) => {
   const { createNode } = actions;
 
@@ -27,8 +27,7 @@ exports.sourceNodes = async (
     api_key: apiKey,
     search_type: "place_reviews",
     place_id: placeId,
-    hl: "en",
-    gl: "us",
+    language: language
   };
 
   const response = await axios
