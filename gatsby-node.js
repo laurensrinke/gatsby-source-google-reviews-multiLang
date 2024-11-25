@@ -1,19 +1,19 @@
 const axios = require("axios");
 
 exports.onPreInit = () =>
-  console.log("Loading gatsby-source-google-reviews-multiLang");
+  console.log("\nLoading gatsby-source-google-reviews-multiLang\n");
 
 const NODE_TYPE = "GoogleReview";
 
 exports.sourceNodes = async (
   { actions, createNodeId, createContentDigest },
-  { placeId, apiKey, language, langs = [], isEnabled, ...rest }
+  { placeId, apiKey, language }
 ) => {
   const { createNode } = actions;
 
   if (!apiKey || typeof apiKey !== "string") {
     throw new Error(
-      "You must supply a valid API Key from Scale Serp. Visit https://scaleserp.com/ for more information."
+      "You must supply a valid API Key from Google. Visit https://console.cloud.google.com/ for more information."
     );
   }
 
@@ -22,31 +22,40 @@ exports.sourceNodes = async (
       "You must supply a valid place id from Google. You can find your place id at https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder."
     );
   }
-
   const params = {
-    api_key: apiKey,
-    search_type: "place_reviews",
+    key: apiKey,
     place_id: placeId,
     language: language
   };
 
   const response = await axios
-    .get("https://api.scaleserp.com/search", {
+    .get("https://maps.googleapis.com/maps/api/place/details/json", {
       params,
     })
     .catch((error) => {
       throw new Error(`Error fetching results from ScaleSerp API: ${error}`);
     });
 
-  if (!response || !response.data)
-    throw new Error(`Error fetching results from ScaleSerp API:`);
+  if (response?.data?.error_message) {
+    console.error(
+      `Error fetching google reviews: ` + response.data.error_message
+    );
+  }
 
-  const reviews = response.data.place_reviews_results || [];
+  if (!response?.data?.result) {
+    console.error(
+      "There was an error fecthing google reviews: no reviews will populate",
+      response.data
+    );
+  }
+
+  const reviews = response?.data?.result?.reviews || [];
+
   reviews.forEach((review, i) => {
     createNode({
       ...review,
-      sourceImage: review.source_image,
-      sourceLink: review.source_link,
+      sourceImage: review.profile_photo_url,
+      sourceLink: review.author_url,
       id: createNodeId(`${NODE_TYPE}-${i}`),
       test: true,
       parent: null,
@@ -64,15 +73,18 @@ exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;
   const typeDefs = `
     type GoogleReview implements Node @dontInfer {
-      rating: Int
-      position: Int
-      body: String
-      date: String
-      sourceLink: String
       sourceImage: String
+      sourceLink: String
+      id: ID
       position: Int
-      source: String
-      position: Int
+      author_name: String
+      author_url: String
+      language: String
+      rating: Int
+      profile_photo_url: String
+      time: Int
+      relative_time_description: String
+      text: String
     }
   `;
 

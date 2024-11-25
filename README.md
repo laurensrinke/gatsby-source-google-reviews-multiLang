@@ -2,12 +2,12 @@
 
 This is forked/modified from https://github.com/unmaskz/gatsby-source-google-reviews/ by unmaskz
 
-This source plugin will allow you to include google place reviews in your gasby graph
+This source plugin will allow you to include google place reviews in your gasby graph using the native google api.
 
 Requirements:
 
 - Google Place Id
-- Scale Serp API key: www.scaleserp.com
+- Google places API Key
 
 ## Instalation
 
@@ -25,7 +25,7 @@ plugins: [
     resolve: `gatsby-source-google-reviews-en`,
     options: {
       placeId: `placeid`,
-      apiKey: GATSBY_SCALE_SERP_API_KEY,
+      apiKey: GATSBY_GOGGLE_API_KEY,
     },
   },
 ]
@@ -35,21 +35,23 @@ You can find your place id [here](https://developers.google.com/maps/documentati
 
 ## Query reviews
 
-### All Reviews
+### All Reviews Schema
 
 ```
 {
   googleReview {
-    id
-    rating
-    position
-    body
-    date
-    sourceLink
-    sourceImage
-    position
-    source
-    position
+  sourceImage: String
+      sourceLink: String
+      id: ID
+      position: Int
+      author_name: String
+      author_url: String
+      language: String
+      rating: Int
+      profile_photo_url: String
+      time: Int
+      relative_time_description: String
+      text: String
   }
 }
 ```
@@ -60,16 +62,17 @@ You can find your place id [here](https://developers.google.com/maps/documentati
 {
   allGoogleReview{
     nodes{
-      id
-      rating
-      position
-      body
-      date
-      sourceLink
-      sourceImage
-      position
-      source
-      position
+      sourceLink: String
+      id: ID
+      position: Int
+      author_name: String
+      author_url: String
+      language: String
+      rating: Int
+      profile_photo_url: String
+      time: Int
+      relative_time_description: String
+      text: String
     }
   }
 }
@@ -77,8 +80,3 @@ You can find your place id [here](https://developers.google.com/maps/documentati
 
 Your Support is appreceated and goes a long way to keeping open source software available and maintained:
 Buy me a coffee: https://www.buymeacoffee.com/stargazerllc
-
-
-** TODO: **
-* Add pure google support instead of scale serp
-* add Cypress.io

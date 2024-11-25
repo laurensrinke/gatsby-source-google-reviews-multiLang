@@ -1,7 +1,7 @@
 {
   "name": "gatsby-source-google-reviews-multiLang",
-  "version": "1.0.2",
-  "description": "A gatsby plugin to source english google places reviews",
+  "version": "2.0.0",
+  "description": "A gatsby plugin to source google places reviews in given language",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,7 +11,7 @@
     "gatsby",
     "gatsby-plugin"
   ],
-  "author": "Stargazer LLC <kenny.hammerlund@gmail.com>",
+  "author": "Laurens Rinke <mail@laurens-rinke.de",
   "license": "0BSD",
   "dependencies": {
     "gatsby": "^2.28.2",
